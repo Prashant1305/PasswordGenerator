@@ -1,5 +1,4 @@
 "Use Strict"
-console.log(Math.floor(Math.random()*95)+32);
 const upperSet="ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 const lowerSet="abcdefghijklmnopqrstuvwxyz";
 const numberSet="1234567890";
@@ -13,17 +12,23 @@ gen.addEventListener("click",()=>{
     let temp=passwordLength.value;
     let password="";
     let allowedSet=checkTick();
-    while(temp)
-    {
-        let num=Math.floor(Math.random()*4);
-        if(chckSet(num,allowedSet))
-        {
-            password+=rand(num);
-            // console.log(password);
-            temp--;
-        }
+    if(allowedSet.length==0){
+        output.textContent="Pleas Tick atleast one of the box";
     }
-    output.textContent=password;
+    else
+    {
+        while(temp)
+        {
+            let num=Math.floor(Math.random()*4);
+            if(chckSet(num,allowedSet))
+            {
+                password+=rand(num);
+                // console.log(password);
+                temp--;
+            }
+        }
+        output.textContent=password;
+    }
 });
 
 function chckSet(num,allowedSet)
@@ -86,11 +91,6 @@ function rand(i)
 }
 function getRandomData(str)
 {
-    let sze=0;
-    for(let i of str)
-    {
-        sze++;
-    }
-    let idx=Math.floor(Math.random()*(sze));
+    let idx=Math.floor(Math.random()*(str.length));
     return str[idx];
 }
